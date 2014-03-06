@@ -20,11 +20,6 @@ module NestedForm
       options = args.extract_options!.symbolize_keys
       association = args.pop
 
-      model_object = options.delete(:model_object) do
-        reflection = object.class.reflect_on_association(association)
-        reflection.klass.new
-      end
-
       options[:class] = [options[:class], "add_nested_fields"].compact.join(" ")
       options["data-association"] = association
       options["data-blueprint-id"] = fields_blueprint_id = fields_blueprint_id_for(association)
