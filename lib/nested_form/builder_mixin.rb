@@ -20,10 +20,6 @@ module NestedForm
       options = args.extract_options!.symbolize_keys
       association = args.pop
 
-      unless object.respond_to?("#{association}_attributes=")
-        raise ArgumentError, "Invalid association. Make sure that accepts_nested_attributes_for is used for #{association.inspect} association."
-      end
-
       model_object = options.delete(:model_object) do
         reflection = object.class.reflect_on_association(association)
         reflection.klass.new
